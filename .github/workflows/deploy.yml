@@ -56,10 +56,10 @@ jobs:
             composer install --no-dev --optimize-autoloader --no-interaction
 
             echo "Installing NPM dependencies..."
-            npm ci --production
+            npm ci 
 
             echo "Building frontend assets..."
-            npx mix --production
+            npm run production
 
             echo "Generating blocklist..."
             node generateBlocklist.mjs
