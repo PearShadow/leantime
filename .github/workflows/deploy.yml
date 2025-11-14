@@ -25,7 +25,7 @@ jobs:
           chmod 644 ~/.ssh/known_hosts
 
       - name: Deploy to Staging
-        if: github.ref == 'refs/heads/develop' 
+        if: github.ref == 'refs/heads/develop'
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
@@ -40,7 +40,6 @@ jobs:
 
             echo "Changing to deployment directory..."
             cd $STAGING_PATH
-            pwd 
 
             echo "Fetching latest changes..."
             git fetch origin develop
