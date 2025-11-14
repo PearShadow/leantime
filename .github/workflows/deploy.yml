@@ -59,7 +59,7 @@ jobs:
             npm ci 
 
             echo "Building frontend assets..."
-            npm run production
+            npx mix --production
 
             echo "Generating blocklist..."
             node generateBlocklist.mjs
