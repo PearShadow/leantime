@@ -3,7 +3,6 @@ name: Deploy Leantime
 on:
   push:
     branches:
-      - cd-test  # Deploy to test server now
       - develop    # Deploy to staging server
       - master     # Deploy to production server
   workflow_dispatch:  # Allow manual deployment
