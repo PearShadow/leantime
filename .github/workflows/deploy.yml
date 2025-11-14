@@ -41,6 +41,7 @@ jobs:
 
             echo "Changing to deployment directory..."
             cd $STAGING_PATH
+            echo $STAGING_PATH
 
             echo "Fetching latest changes..."
             git fetch origin develop
