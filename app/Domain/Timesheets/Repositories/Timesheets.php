@@ -644,7 +644,7 @@ class Timesheets extends Repository
         ) VALUES (
             :userId,
             :ticket,
-            NOW(),
+            :modified,
             :hours,
             :kind,
             :description,
