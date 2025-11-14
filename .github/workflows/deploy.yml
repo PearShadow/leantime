@@ -3,9 +3,9 @@ name: Deploy Leantime
 on:
   push:
     branches:
-      - develop    # Deploy to staging server
-      - master     # Deploy to production server
-  workflow_dispatch:  # Allow manual deployment
+      - develop    
+      - master   
+  workflow_dispatch:  
 
 jobs:
   deploy:
@@ -25,7 +25,7 @@ jobs:
           chmod 644 ~/.ssh/known_hosts
 
       - name: Deploy to Staging
-        if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/cd-test'
+        if: github.ref == 'refs/heads/develop' 
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
