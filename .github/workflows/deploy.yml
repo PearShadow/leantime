@@ -25,7 +25,7 @@ jobs:
           chmod 644 ~/.ssh/known_hosts
 
       - name: Deploy to Staging
-        if: github.ref == 'refs/heads/develop'
+        if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/#4836-multiple-logs-on-same-description'
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
