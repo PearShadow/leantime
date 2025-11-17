@@ -341,7 +341,7 @@ return [
         |
         */
 
-        'lifetime' => env('LEAN_SESSION_EXPIRATION', 480), // 8 hours
+        'lifetime' => env('LEAN_SESSION_EXPIRATION', 4800), // 8 hours
 
         'expire_on_close' => false,
 
