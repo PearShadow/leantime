@@ -162,3 +162,70 @@
     color: #6c757d;
     line-height: 1.4;
 }
+
+body.colorMode-dark .modern-search-input {
+    background-color: var(--secondary-background);
+    border-color: var(--main-border-color);
+    color: var(--primary-font-color) !important;
+}
+
+body.colorMode-dark .modern-search-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: var(--input-shadow);
+}
+
+body.colorMode-dark .modern-search-input::placeholder,
+body.colorMode-dark .modern-search-clear {
+    color: var(--primary-font-color);
+}
+
+body.colorMode-dark .modern-search-clear:hover {
+    background-color: var(--dropdown-link-hover-bg);
+    color: var(--dropdown-link-hover-color);
+}
+
+body.colorMode-dark .modern-search-autocomplete {
+    background: var(--secondary-background);
+    border-color: var(--primary-color);
+    box-shadow: var(--large-shadow);
+}
+
+body.colorMode-dark .modern-search-item {
+    border-bottom-color: var(--main-border-color);
+}
+
+body.colorMode-dark .modern-search-item:hover {
+    background-color: var(--dropdown-link-hover-bg);
+}
+
+body.colorMode-dark .modern-search-item.selected {
+    background-color: var(--primary-color);
+}
+
+body.colorMode-dark .modern-search-item-title,
+body.colorMode-dark .modern-search-item-meta,
+body.colorMode-dark .modern-search-empty-hint {
+    color: var(--primary-font-color) !important;
+}
+
+body.colorMode-dark .modern-search-item.selected .modern-search-item-title,
+body.colorMode-dark .modern-search-item.selected .modern-search-item-meta {
+    color: var(--accent1-color) !important;
+}
+
+body.colorMode-dark .modern-search-item-tag,
+body.colorMode-dark .modern-search-footer {
+    background-color: var(--main-menu-link-bg);
+    color: var(--primary-font-color);
+}
+
+body.colorMode-dark .modern-search-footer {
+    border-top-color: var(--main-border-color);
+}
+
+body.colorMode-dark .modern-search-footer kbd {
+    background-color: var(--secondary-background);
+    border-color: var(--main-border-color);
+    color: var(--primary-font-color);
+    box-shadow: none;
+}
