@@ -2233,6 +2233,20 @@ private function logPatchChanges($ticketId, $oldValues, $newParams, $oldTicket)
      */
     public function updateTicketStatusAndSorting($params, $handler = null): bool
     {
+        $handlerTicketId = null;
+        $oldStatus = null;
+        $projectId = null;
+
+        if (is_string($handler) && preg_match('/ticket_(\d+)/', $handler, $matches)) {
+            $handlerTicketId = (int) $matches[1];
+            $ticketBeforeMove = $this->getTicket($handlerTicketId);
+
+            if ($ticketBeforeMove) {
+                $oldStatus = (int) $ticketBeforeMove->status;
+                $projectId = (int) $ticketBeforeMove->projectId;
+            }
+        }
+
         foreach ($params as $status => $ticketList) {
             if (is_numeric($status) && ! empty($ticketList)) {
                 $parsedTicketList = [];
@@ -2252,6 +2266,18 @@ private function logPatchChanges($ticketId, $oldValues, $newParams, $oldTicket)
                     if ($this->ticketRepository->updateTicketStatus($id, $status, ($key * 100), $handler) === false) {
                         return false;
                     }
+                }
+            }
+        }
+
+        if ($handlerTicketId !== null && $oldStatus !== null && $projectId !== null) {
+            $ticketAfterMove = $this->getTicket($handlerTicketId);
+
+            if ($ticketAfterMove) {
+                $newStatus = (int) $ticketAfterMove->status;
+
+                if ($oldStatus !== $newStatus) {
+                    $this->logStatusChangeActivity($handlerTicketId, $oldStatus, $newStatus, $projectId);
                 }
             }
         }
