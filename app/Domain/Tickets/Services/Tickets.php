@@ -22,6 +22,7 @@ use Leantime\Domain\Projects\Repositories\Projects as ProjectRepository;
 use Leantime\Domain\Projects\Services\Projects as ProjectService;
 use Leantime\Domain\Setting\Repositories\Setting as SettingRepository;
 use Leantime\Domain\Sprints\Services\Sprints as SprintService;
+use Leantime\Domain\Tickets\Models\TicketHistoryModel;
 use Leantime\Domain\Tickets\Models\Tickets as TicketModel;
 use Leantime\Domain\Tickets\Repositories\TicketHistory;
 use Leantime\Domain\Tickets\Repositories\Tickets as TicketRepository;
@@ -2043,6 +2044,37 @@ private function logPatchChanges($ticketId, $oldValues, $newParams, $oldTicket)
         error_log('Failed to log patch changes: ' . $e->getMessage());
     }
 }
+
+    /**
+     * Log a kanban status change to the ticket activity history.
+     */
+    private function logStatusChangeActivity(
+        int $ticketId,
+        int $oldStatus,
+        int $newStatus,
+        int $projectId
+    ): void {
+        try {
+            $ticketHistoryModel = app()->make(TicketHistoryModel::class);
+            $statusLabels = $this->getStatusLabels($projectId);
+            $currentUserName = session('userdata.name') ?? 'Unknown User';
+
+            $oldStatusText = $statusLabels[$oldStatus]['name'] ?? (string) $oldStatus;
+            $newStatusText = $statusLabels[$newStatus]['name'] ?? (string) $newStatus;
+
+            $ticketHistoryModel->addStatusChange(
+                $ticketId,
+                $oldStatus,
+                $newStatus,
+                $oldStatusText,
+                $newStatusText,
+                $currentUserName,
+                'status-select'
+            );
+        } catch (\Exception $e) {
+            Log::error($e);
+        }
+    }
 
     /**
      * moveTicket - Moves a ticket from one project to another. Milestone children will be moved as well
